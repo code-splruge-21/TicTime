@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#7c3aed" />
   <title>TicTime · Tic-Tac-Toe</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -53,23 +55,30 @@
 
       <div class="options">
         <label class="option">Mode
-          <select id="mode-select" disabled><option>Two players</option><option>vs Computer</option></select>
-          <span class="badge">Coming soon</span>
+          <select id="mode-select">
+            <option value="pvp">Two players</option>
+            <option value="pve">vs Computer</option>
+          </select>
         </label>
         <label class="option">Board
-          <select id="size-select" disabled><option>3 × 3</option><option>4 × 4</option><option>5 × 5</option></select>
-          <span class="badge">Coming soon</span>
+          <select id="size-select">
+            <option value="3">3 × 3</option>
+            <option value="4">4 × 4</option>
+            <option value="5">5 × 5</option>
+          </select>
         </label>
       </div>
     </section>
 
     <aside class="panel history">
       <h2>Move history</h2>
-      <p class="muted">Coming soon. Every move will be listed here so you can jump back in time.</p>
+      <ol id="history-list" class="history-list"></ol>
     </aside>
   </main>
-
-  <footer class="footer"><!-- TODO: add a footer (credits, GitHub link, year) --></footer>
+  <!-- added a footer to the page -->
+  <footer class="footer">
+    <p>TicTime &bull; Built with plain HTML, CSS &amp; JavaScript &bull; <a href="https://github.com/code-splruge-21/TicTime" target="_blank" rel="noopener">GitHub</a> &bull; 2026</p>
+  </footer>
 
   <script src="js/game.js"></script>
   <script src="js/ui.js"></script>

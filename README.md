@@ -17,12 +17,22 @@ git clone <your-fork-url>
 cd TicTime
 ```
 
-Then either double-click `index.html`, or serve the folder (handy if you work on offline/PWA features):
+Serve the folder locally to use all features, including installing TicTime and playing offline. Service workers do not run when opening `index.html` directly from the file system.
 
 ```bash
-python3 -m http.server 8000     # then open http://localhost:8000
-# or: npx serve
+python3 -m http.server 8000
 ```
+
+Open [http://localhost:8000](http://localhost:8000). The first visit caches the app files; after that, TicTime can be loaded and played offline. The font uses local system fallbacks, so it does not need a network connection.
+
+## Install and test offline
+
+1. Open TicTime at `http://localhost:8000` in a browser that supports installable web apps.
+2. Use the browser's **Install app** button or menu to install TicTime.
+3. In DevTools, open **Application** → **Manifest** to check the app details and icons, then **Service Workers** to confirm the worker is activated.
+4. Open **Application** → **Service Workers**, enable **Offline**, and reload the page. The game should load and remain playable.
+
+Service workers require a secure context: `localhost` is supported for local testing, and deployed sites should use HTTPS.
 
 ## How to play
 
