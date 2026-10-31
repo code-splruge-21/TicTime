@@ -1,12 +1,16 @@
 # TicTime ⏱️❌⭕
 
-A colourful, animated Tic-Tac-Toe game built with plain **HTML, CSS and JavaScript**. No frameworks, no build step, no installs.
-
-> 🎯 **Hack Day project.** TicTime is *deliberately incomplete*: a few things are broken and a few features are missing. Each one is an issue waiting for you. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
+A colourful, animated Tic-Tac-Toe game built with plain **HTML, CSS and JavaScript**. No frameworks or build step are needed.
 
 ## Screenshots
 
-_Coming soon._
+These project previews show a game in progress, a win with all three winning squares highlighted, and the dark theme.
+
+![TicTime game in progress with X and O marks, scores, controls, and move history](docs/screenshot.svg)
+
+![TicTime win with the three winning squares highlighted in purple](docs/screenshot-win.svg)
+
+![TicTime in dark mode with dark scoreboard, status pill, and board](docs/screenshot-dark.svg)
 
 ## Run it
 
@@ -14,48 +18,53 @@ You only need a browser.
 
 ```bash
 git clone <your-fork-url>
-cd TicTime
+cd TicTimePro
 ```
 
-Serve the folder locally to use all features, including installing TicTime and playing offline. Service workers do not run when opening `index.html` directly from the file system.
+Open `index.html` directly, or serve the folder to use install/offline support:
 
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8000     # then open http://localhost:8000
+# or: npx serve
 ```
-
-Open [http://localhost:8000](http://localhost:8000). The first visit caches the app files; after that, TicTime can be loaded and played offline. The font uses local system fallbacks, so it does not need a network connection.
-
-## Install and test offline
-
-1. Open TicTime at `http://localhost:8000` in a browser that supports installable web apps.
-2. Use the browser's **Install app** button or menu to install TicTime.
-3. In DevTools, open **Application** → **Manifest** to check the app details and icons, then **Service Workers** to confirm the worker is activated.
-4. Open **Application** → **Service Workers**, enable **Offline**, and reload the page. The game should load and remain playable.
-
-Service workers require a secure context: `localhost` is supported for local testing, and deployed sites should use HTTPS.
 
 ## How to play
 
-1. Player **X** goes first, then players take turns clicking an empty square.
-2. Get three of your marks in a row (across, down or diagonally) to win.
-3. If all nine squares fill up with no winner, it's a draw.
-4. **New Game** clears the board; the scoreboard keeps counting.
+1. Player **X** goes first, then players take turns choosing an empty square.
+2. Get a complete row, column or diagonal to win. On larger boards, the line matches the board size.
+3. Choose two players or play as X against the computer.
+4. **New Game** clears the board; the scoreboard keeps counting. **Reset Scores** clears it.
+5. Select a move in the history panel to review an earlier position.
+
+## Troubleshooting & FAQ
+
+**Why can't I install the app?** Serve it from localhost or HTTPS. Browsers do not support service workers on a `file://` page.
+
+**How do I use the offline version?** Open the app online once from localhost or HTTPS. The service worker caches the app files for later visits.
+
+**Can the computer lose?** On a 3×3 board its minimax search prevents a loss. The larger boards use immediate win/block checks and are not guaranteed unbeatable.
+
+**How do I run the automated tests?** Install Node.js 20 or later and run `node --test` from the project root.
 
 ## Project structure
 
 ```
-TicTime/
-├── index.html        # page layout
-├── css/styles.css    # all styling and animations
-└── js/
-    ├── game.js       # rules: win/draw detection (no DOM code)
-    ├── ui.js         # drawing the board, scores, theme, confetti
-    └── main.js       # game state + event handlers
+TicTimePro/
+├── index.html        # page layout and controls
+├── css/styles.css    # styling and animations
+├── manifest.json     # installable app metadata
+├── sw.js             # offline asset cache
+├── js/
+│   ├── game.js       # rules and computer move selection
+│   ├── ui.js         # board, scores, theme and history rendering
+│   └── main.js       # game state and event handlers
+├── tests/game.test.js
+└── docs/ARCHITECTURE.md
 ```
 
 ## Contributing
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md). Pick an issue labelled `documentation`, `beginner` or `hard`, fix it, and open a pull request.
+Read [CONTRIBUTING.md](CONTRIBUTING.md). Run `node --test` before opening a pull request.
 
 ## License
 
